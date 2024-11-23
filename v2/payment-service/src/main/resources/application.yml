@@ -1,0 +1,34 @@
+server:
+  port: 1905
+
+spring:
+  application:
+    name: "payment-service"
+  config:
+    import: "optional:configserver:http://localhost:1907"
+  cloud:
+    stream:
+      bindings:
+        springCloudBusInput:
+          destination: common.config-server.cloud-bus
+          group: cloud-bus.${spring.application.name}:${spring.profiles.active}:${random.uuid}
+        springCloudBusOutput:
+          destination: common.config-server.cloud-bus
+          group: cloud-bus.${spring.application.name}:${spring.profiles.active}:${random.uuid}
+    bus:
+      id: ${spring.application.name}:${spring.profiles.active}:${random.uuid}
+      destination: common.config-server.cloud-bus
+      enabled: true
+      refresh:
+        enabled: true
+      env:
+        enabled: true
+
+  kafka:
+    bootstrap-servers: "localhost:9092"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

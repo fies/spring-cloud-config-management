@@ -1,0 +1,14 @@
+server:
+  port: 1903
+spring:
+  application:
+    name: "shipment-service"
+  config:
+    import: "optional:configserver:http://localhost:1907"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

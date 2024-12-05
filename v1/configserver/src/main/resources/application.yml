@@ -1,0 +1,23 @@
+server:
+  port: 1907
+
+spring:
+  application:
+    name: "configserver"
+  profiles:
+    active: git
+#    active: native
+  cloud:
+    config:
+      server:
+#        native:
+#          search-locations: "classpath:/configs"
+#          search-locations: "file:///Users/configs"
+        git:
+          uri: "https://github.com/fies/microservice-configs.git"
+          search-paths: configs
+          default-label: main
+          timeout: 5
+
+encrypt:
+  key: 'ABCDXYZ'

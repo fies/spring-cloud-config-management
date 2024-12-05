@@ -1,0 +1,50 @@
+server:
+  port: 1907
+
+spring:
+  application:
+    name: "configserver"
+  profiles:
+    active: git
+#    active: native
+  cloud:
+    config:
+      server:
+#        native:
+#          search-locations: "classpath:/configs"
+#          #search-locations: "file:///Users/configs"
+        git:
+          uri: "https://github.com/fies/microservice-configs.git"
+          search-paths: configs
+          default-label: main
+          timeout: 5
+
+    stream:
+      bindings:
+        springCloudBusInput:
+          destination: common.config-server.cloud-bus
+          group: cloud-bus.${spring.application.name}:${spring.profiles.active}:${random.uuid}
+        springCloudBusOutput:
+          destination: common.config-server.cloud-bus
+          group: cloud-bus.${spring.application.name}:${spring.profiles.active}:${random.uuid}
+
+    bus:
+      id: ${spring.application.name}:${spring.profiles.active}:${random.uuid}
+      destination: common.config-server.cloud-bus
+      enabled: true
+      refresh:
+        enabled: true
+      trace:
+        enabled: true
+  kafka:
+    bootstrap-servers: localhost:9092
+
+encrypt:
+  key: 'ABCDXYZ'
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

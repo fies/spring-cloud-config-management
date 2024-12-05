@@ -28,14 +28,6 @@ spring:
           destination: common.config-server.cloud-bus
           group: cloud-bus.${spring.application.name}:${spring.profiles.active}:${random.uuid}
 
-    bus:
-      id: ${spring.application.name}:${spring.profiles.active}:${random.uuid}
-      destination: common.config-server.cloud-bus
-      enabled: true
-      refresh:
-        enabled: true
-      trace:
-        enabled: true
   kafka:
     bootstrap-servers: localhost:9092
 

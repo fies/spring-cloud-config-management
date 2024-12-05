@@ -21,8 +21,6 @@ spring:
       enabled: true
       refresh:
         enabled: true
-      env:
-        enabled: true
 
   kafka:
     bootstrap-servers: "localhost:9092"

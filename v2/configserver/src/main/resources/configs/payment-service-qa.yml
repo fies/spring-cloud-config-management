@@ -1,4 +1,4 @@
 product:
   service:
-    url: http://product-service.qa2
+    url: http://product-service.qa
     apiKey: '{cipher}e37022638a9a018db2008bd8c5e935c45635b1b178ddf93d2215d2b6b1a101e8'
